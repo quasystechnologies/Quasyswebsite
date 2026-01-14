@@ -1,0 +1,84 @@
+.technologies {
+  padding: 80px 20px;
+  background: #0a1628;
+  color: white;
+}
+
+.technologies .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tech-category {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tech-category:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 114, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tech-icon-container {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.tech-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.react-icon { color: #61DAFB; }
+.node-icon { color: #68A063; }
+.flutter-icon { color: #02569B; }
+.db-icon { color: #4DB33D; }
+.cloud-icon { color: #FF9900; }
+.devops-icon { color: #3178C6; }
+
+.tech-category h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #00c6ff;
+}
+
+.tech-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tech-list li {
+  padding: 5px 0;
+  color: #cbd5e0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tech-list li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .technologies {
+    padding: 60px 15px;
+  }
+  
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+}

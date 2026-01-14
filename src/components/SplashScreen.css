@@ -1,0 +1,115 @@
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.splash-quantum-circuit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Logo Container */
+.logo-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(0, 198, 255, 0.8));
+  animation: logoGlow 2s infinite alternate;
+}
+
+.logo-lighting-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 198, 255, 0.4) 0%, transparent 70%);
+  animation: lightingEffect 3s infinite alternate;
+  z-index: -1;
+}
+
+/* Animations */
+@keyframes logoGlow {
+  0% {
+    filter: drop-shadow(0 0 20px rgba(0, 198, 255, 0.8));
+  }
+  100% {
+    filter: drop-shadow(0 0 30px rgba(0, 198, 255, 1));
+  }
+}
+
+@keyframes lightingEffect {
+  0% {
+    width: 140px;
+    height: 140px;
+    opacity: 0.6;
+  }
+  100% {
+    width: 180px;
+    height: 180px;
+    opacity: 0.8;
+  }
+}
+
+/* Loading text animation */
+.splash-screen::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00c6ff, transparent);
+  border-radius: 2px;
+  animation: loadingBar 1.5s infinite;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 100px;
+  }
+  
+  .logo-lighting-effect {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .splash-screen::after {
+    bottom: 15%;
+    width: 100px;
+  }
+}
+
+@keyframes loadingBar {
+  0% {
+    width: 20px;
+  }
+  50% {
+    width: 100px;
+  }
+  100% {
+    width: 20px;
+  }
+}
