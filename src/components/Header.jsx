@@ -11,36 +11,77 @@ function Header() {
   const location = useLocation();
 
   useEffect(() => {
+    let scrollTimeout;
+      
     const handleScroll = () => {
-      const heroSection = document.querySelector('.hero');
-      if (heroSection) {
-        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-        if (window.scrollY >= heroBottom - 100) {
-          setScrolledPastHero(true);
+      // Debounce scroll events
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        // Check if we're on the home page
+        if (location.pathname === '/') {
+          const heroSection = document.querySelector('.hero');
+            
+          if (heroSection) {
+            // Get the hero section's offset from the top of the document
+            const heroOffsetTop = heroSection.offsetTop;
+            const heroHeight = heroSection.offsetHeight;
+            // Calculate where the hero section ends, accounting for header height
+            const headerHeight = document.querySelector('.header')?.offsetHeight || 70;
+            const triggerPoint = heroOffsetTop + heroHeight - headerHeight;
+            const scrollTop = window.scrollY;
+              
+            // Trigger background change when scrolled past hero section (accounting for header height)
+            setScrolledPastHero(scrollTop > triggerPoint);
+          } else {
+            // Fallback: trigger after scrolling 100px
+            setScrolledPastHero(window.scrollY > 100);
+          }
         } else {
-          setScrolledPastHero(false);
+          // For other pages, always show background
+          setScrolledPastHero(true);
         }
-      } else {
-        // If there's no hero section on this page, set to scrolled state by default
-        setScrolledPastHero(location.pathname !== '/');
-      }
+      }, 10); // 10ms debounce
     };
-
+  
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
-
+  
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
     };
   }, [location.pathname]);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    // Debug logging removed for production
+    setIsMenuOpen(prev => !prev);
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  // Handle body scroll lock
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
+  // Close menu when location changes (navigation)
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  }, [location.pathname]);
+
+
 
   return (
     <header className={`header ${scrolledPastHero ? 'scrolled' : ''}`}>
@@ -53,6 +94,10 @@ function Header() {
               <p className="company-tagline">TECHNOLOGIES</p>
             </div> */}
           </Link>
+        </div>
+        
+        <div className="mobile-menu-toggle" onClick={toggleMenu}>
+          {isMenuOpen ? <FaTimes /> : <FaBars />}
         </div>
         
         <nav className={`navigation ${isMenuOpen ? 'active' : ''}`}>
@@ -115,10 +160,6 @@ function Header() {
             </Link> */}
           </div>
         </nav>
-        
-        <div className="mobile-menu-toggle" onClick={toggleMenu}>
-          {isMenuOpen ? <FaTimes /> : <FaBars />}
-        </div>
       </div>
       <div className="header-divider"></div>
     </header>

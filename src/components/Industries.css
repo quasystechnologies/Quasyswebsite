@@ -1,7 +1,8 @@
 .industries {
-  padding: 80px 20px;
+  padding: 120px 20px 80px 20px;
   background: #0a1628;
   color: white;
+  min-height: 100vh;
 }
 
 .industries .container {
@@ -53,19 +54,23 @@
   line-height: 1.6;
 }
 
-.solutions-list {
+.industry-solutions {
   list-style: none;
   padding: 0;
+  margin: 0;
+  text-align: left;
+  display: inline-block;
 }
 
-.solutions-list li {
-  padding: 5px 0;
+.industry-solutions li {
+  padding: 8px 0;
   color: #a0aec0;
   position: relative;
   padding-left: 20px;
+  font-size: 0.95rem;
 }
 
-.solutions-list li::before {
+.industry-solutions li::before {
   content: "•";
   color: #00c6ff;
   position: absolute;
@@ -76,10 +81,70 @@
 
 @media (max-width: 768px) {
   .industries {
-    padding: 60px 15px;
+    padding: 100px 15px 60px 15px;
+  }
+  
+  .section-header h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .section-header p {
+    font-size: 1rem;
+    text-align: center;
+    padding: 0 10px;
   }
   
   .industries-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .industry-card {
+    padding: 25px 20px;
+    margin: 0 5px;
+  }
+  
+  .industry-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  
+  .industry-card p {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+  }
+  
+  .industry-icon-container {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .industry-solutions {
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .industry-solutions li {
+    font-size: 0.9rem;
+    padding: 6px 0;
+  }
+  
+  @media (max-width: 480px) {
+    .industries {
+      padding: 90px 10px 50px 10px;
+    }
+    
+    .industry-card {
+      padding: 20px 15px;
+    }
+    
+    .industry-card h3 {
+      font-size: 1.2rem;
+    }
+    
+    .industry-icon-container {
+      font-size: 2rem;
+    }
   }
 }
